@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pr-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div id="candidatosContainer">
+
+       <ul>
+            <li>Jair Bolsonaro: 22 </li>
+            <li>Lula: 13</li>
+            <li>luciano junior: 01</li>
+
+       </ul>
+
+
+    </div>
+
+
+    <div id="container">
+
+       <div id="screen">
+
+
+        <div id="telaFinal">
+
+        <h1 id="textoFinal">SEU VOTO FOI COMPUTADO</h1>
+
+
+        </div>
+
+        
+            <div id="tela2">
+                <p id="votoTexto">Voto para todos os candidatos</p>
+                <h2 id="numeroT">Número </h2>
+                <button class="numerosTela" id="emptyNumber1"></button>
+                <button class="numerosTela"id="emptyNumber2"></button>
+                
+                <h2 id="nomeT">Nome</h2>
+                <div id="emptyName"></div>
+                <h2 id="partidoT">Partido</h2>
+                <div id="partido"></div>
+                <div id="foto"></div>
+            </div>
+    
+
+
+       </div>
+       
+       
+       <div id="board">
+
+        <button class="numbers" onclick="numeros(1)"  data-audiourl="som dos botoes.mp3">1</button>
+        <button  onclick="numeros(2)" class="numbers" data-audiourl="som dos botoes.mp3">2</button>
+        <button  onclick="numeros(3)" class="numbers"data-audiourl="som dos botoes.mp3">3</button>
+        <button  onclick="numeros(4)"class="numbers"data-audiourl="som dos botoes.mp3">4</button>
+        <button  onclick="numeros(5)"class="numbers"data-audiourl="som dos botoes.mp3">5</button>
+        <button  onclick="numeros(6)"class="numbers"data-audiourl="som dos botoes.mp3">6</button>
+        <button  onclick="numeros(7)"class="numbers"data-audiourl="som dos botoes.mp3">7</button>
+        <button  onclick="numeros(8)"class="numbers"data-audiourl="som dos botoes.mp3">8</button>
+        <button  onclick="numeros(9)"class="numbers"data-audiourl="som dos botoes.mp3">9</button>
+        
+        <button class="numbers" onclick="numeros(0)" id="zero"data-audiourl="som dos botoes.mp3">0</button>
+
+    
+        <button  id="branco" onclick="branco()">BRANCO</button>
+        <button  id="corrigir" onclick="correção()">CORRIGIR</button>
+       
+        <button  id="confirmar" onclick="votar()"  class="btnPlayAudio btn btn-success" data-audiourl="som final.mp3">CONFIRMAR</button>
+
+       
+
+    </div>
+
+
+    </div>
+
+    <button onclick="result()" id="result">Resultado</button>
+    
+   <script>
+     var listaAudios = [];
+
+$(document).ready(function () {
+    //já que você quer fazer o carregamento antecipado de tudo, pode fazer isso quando 
+    //a página for carregada. Pode ser ruim fazer isso se forem muitos
+    //arquivos e muito grandes.
+
+    $('.btnPlayAudio').each(function (e) {
+        var url = $(this).attr('data-audiourl');
+        var audioPlay = new Audio(url);
+        audioPlay.preload = "auto";
+
+        var audioData = {
+            'url': $(this).attr('data-audiourl'),
+            'audioPlayObj': audioPlay
+        };
+
+        listaAudios.push(audioData);
+    });
+});
+
+$('.btnPlayAudio').click(function () {
+    var url = $(this).attr('data-audiourl');
+    for (var i = 0; i < listaAudios.length; i++) {
+        if (listaAudios[i].url == url) {
+            var audio = listaAudios[i].audioPlayObj;                        
+            audio.currentTime = 0;
+            audio.volume = 1;
+            audio.play();
+            break;
+        }
+    }
+});
+
+var listaAudios = [];
+
+$(document).ready(function () {
+    //já que você quer fazer o carregamento antecipado de tudo, pode fazer isso quando 
+    //a página for carregada. Pode ser ruim fazer isso se forem muitos
+    //arquivos e muito grandes.
+
+    $('.numbers').each(function (e) {
+        var url = $(this).attr('data-audiourl');
+        var audioPlay = new Audio(url);
+        audioPlay.preload = "auto";
+
+        var audioData = {
+            'url': $(this).attr('data-audiourl'),
+            'audioPlayObj': audioPlay
+        };
+
+        listaAudios.push(audioData);
+    });
+});
+
+$('.numbers').click(function () {
+    var url = $(this).attr('data-audiourl');
+    for (var i = 0; i < listaAudios.length; i++) {
+        if (listaAudios[i].url == url) {
+            var audio = listaAudios[i].audioPlayObj;                        
+            audio.currentTime = 0;
+            audio.volume = 1;
+            audio.play();
+            break;
+        }
+    }
+});
+   </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
